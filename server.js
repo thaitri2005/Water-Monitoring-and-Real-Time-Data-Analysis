@@ -66,7 +66,13 @@ io.on('connection', (socket) => {
   });
 });
 
-const webPort = 3000;
-server.listen(webPort, () => {
-  console.log(`Server running on http://localhost:${webPort}`);
+// const webPort = 3000;
+// server.listen(webPort, () => {
+//   console.log(`Server running on http://localhost:${webPort}`);
+// });
+
+const port = process.env.PORT || 3000;
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
+

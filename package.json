@@ -1,17 +1,27 @@
 {
-  "name": "water-monitoring-and-real-time-data-analysis",
+  "name": "water-monitoring-system",
   "version": "1.0.0",
-  "description": "testing",
-  "main": "index.js",
+  "description": "A Node.js project for monitoring water quality in real-time and visualizing data with charts.",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "author": "",
+  "keywords": [
+    "water-quality",
+    "real-time",
+    "monitoring",
+    "nodejs",
+    "express",
+    "mongodb",
+    "socket.io",
+    "serialport"
+  ],
+  "author": "Thai Huu Tri",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "mongodb": "^6.3.0",
-    "serialport": "^12.0.0",
-    "socket.io": "^4.7.4"
+    "express": "^4.17.1",
+    "mongodb": "^4.1.4",
+    "socket.io": "^4.4.0",
+    "serialport": "^9.2.8"
   }
 }
