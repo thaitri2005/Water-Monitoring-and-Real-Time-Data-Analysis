@@ -1,17 +1,20 @@
 const express = require('express');
 const http = require('http');
+const { Server } = require("socket.io");
 const { SerialPort } = require('serialport');
 const { ReadlineParser } = require('@serialport/parser-readline');
-const socketIo = require('socket.io');
 const { MongoClient } = require('mongodb');
 
 const app = express();
 const server = http.createServer(app);
-const io = socketIo(server);
+const io = new Server(server);
 
 const mongoUrl = 'mongodb://localhost:27017';
 const dbName = 'WaterQuality';
 let db;
+
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
 // Async function to connect to MongoDB
 async function connectToMongo() {
@@ -24,16 +27,12 @@ async function connectToMongo() {
   }
 }
 
-connectToMongo(); // Make sure to call this function early to establish the database connection
+connectToMongo(); // Establish the database connection
 
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
+const serialPort = new SerialPort({ path: 'COM3', baudRate: 115200 });
+const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\r\n' }));
 
-const port = new SerialPort({ path: 'COM3', baudRate: 115200 });
-const parser = port.pipe(new ReadlineParser({ delimiter: '\r\n' }));
-
-parser.on('data', async (data) => { // Note the use of async here
+parser.on('data', async (data) => {
   console.log('Received data:', data);
   try {
     const parts = data.split(', ');
@@ -47,9 +46,9 @@ parser.on('data', async (data) => { // Note the use of async here
     console.log('Parsed Data:', sensorData);
 
     if (db) {
-      await db.collection('VinUniWater').insertOne(sensorData); // Use await to ensure the operation completes
+      await db.collection('VinUniWater').insertOne(sensorData);
       console.log('Data inserted into MongoDB');
-      io.emit('sensorData', sensorData);
+      io.emit('sensorData', sensorData); // Emitting sensor data to all connected clients
     } else {
       console.log('Database connection not established yet.');
     }
@@ -57,7 +56,6 @@ parser.on('data', async (data) => { // Note the use of async here
     console.error('Failed to parse data:', error);
   }
 });
-
 
 io.on('connection', (socket) => {
   console.log('A user connected');
