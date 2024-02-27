@@ -1,5 +1,6 @@
 const socket = io();
 
+// Chart setup
 const tempCtx = document.getElementById('tempChart').getContext('2d');
 const phCtx = document.getElementById('phChart').getContext('2d');
 const tdsCtx = document.getElementById('tdsChart').getContext('2d');
@@ -46,24 +47,30 @@ const tdsChart = new Chart(tdsCtx, {
     options: {}
 });
 
-socket.on('sensorData', (data) => {
-    const time = new Date(data.TimeRecorded).toLocaleTimeString();
-    updateChart(tempChart, time, data.Temp);
-    updateChart(phChart, time, data.pH);
-    updateChart(tdsChart, time, data.TDS);
-});
-
-function updateChart(chart, label, data) {
-    chart.data.labels.push(label);
+// Function to update charts with new data
+function addData(chart, label, data) {
+    if (chart.data.labels.length >= 20) {
+        chart.data.labels.shift(); // Remove the oldest label
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.shift(); // Remove the oldest data point
+        });
+    }
+    chart.data.labels.push(label); // Add the new label
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+        dataset.data.push(data); // Add the new data point
     });
-    chart.update();
+    chart.update(); // Refresh the chart
 }
 
-// Existing app.js code remains unchanged until the socket.on('sensorData', (data) => { ... });
+// WebSocket event for incoming sensor data
+socket.on('sensorData', (data) => {
+    const time = new Date(data.TimeRecorded).toLocaleTimeString();
+    addData(tempChart, time, data.Temp);
+    addData(phChart, time, data.pH);
+    addData(tdsChart, time, data.TDS);
+});
 
-// Add these lines at the end of the app.js file
+// Button event listeners to toggle chart display
 document.getElementById('showTempChart').addEventListener('click', function() {
     showChart('tempChart');
 });
@@ -76,6 +83,7 @@ document.getElementById('showTdsChart').addEventListener('click', function() {
     showChart('tdsChart');
 });
 
+// Function to show the selected chart and hide others
 function showChart(chartId) {
     document.querySelectorAll('.chart').forEach(function(chart) {
         chart.style.display = 'none'; // Hide all charts
