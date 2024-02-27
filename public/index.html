@@ -2,23 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Water Quality Monitoring</title>
+    <title>Water Quality Monitoring Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>Water Quality Data</h1>
-    <div id="data"></div>
+    <div id="greeting">
+        <h1>Welcome to the Water Quality Monitoring Dashboard</h1>
+        <button id="showTempChart">Show Temperature Chart</button>
+        <button id="showPhChart">Show pH Chart</button>
+        <button id="showTdsChart">Show TDS Chart</button>
+    </div>
+    <div id="chartContainer">
+        <canvas id="tempChart" class="chart"></canvas>
+        <canvas id="phChart" class="chart" style="display:none;"></canvas>
+        <canvas id="tdsChart" class="chart" style="display:none;"></canvas>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-        socket.on('sensorData', function(data) {
-            document.getElementById('data').innerHTML = `
-                <p>Temperature: ${data.Temp} °C</p>
-                <p>pH: ${data.pH}</p>
-                <p>TDS: ${data.TDS} ppm</p>
-                <p>Time Recorded: ${data.TimeRecorded}</p>
-            `;
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
