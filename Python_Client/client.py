@@ -1,11 +1,3 @@
-#
-#   @ File: client.py
-#   
-#   @ Author: André Vargas (https://github.com/andrevargas22)
-#
-#   @ This code is a small client example to interact with my ESP8266 Soft Access Point code to send and recieve json data
-#
-
 # Imports
 import requests
 from requests.auth import HTTPBasicAuth
