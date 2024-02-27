@@ -1,8 +1,6 @@
 const express = require('express');
 const http = require('http');
 const { Server } = require("socket.io");
-const { SerialPort } = require('serialport');
-const { ReadlineParser } = require('@serialport/parser-readline');
 const { MongoClient } = require('mongodb');
 
 const app = express();
@@ -17,6 +15,9 @@ let db;
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 // Async function to connect to MongoDB Atlas
 async function connectToMongo() {
   try {
@@ -30,32 +31,24 @@ async function connectToMongo() {
 
 connectToMongo(); // Establish the database connection
 
-
-const serialPort = new SerialPort({ path: 'COM3', baudRate: 115200 });
-const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\r\n' }));
-
-parser.on('data', async (data) => {
-  console.log('Received data:', data);
+// Endpoint to receive data from the local bridge
+app.post('/data', async (req, res) => {
+  console.log('Received data:', req.body);
   try {
-    const parts = data.split(', ');
-    const sensorData = {
-      Temp: parseFloat(parts[0].split(': ')[1]),
-      pH: parseFloat(parts[1].split(': ')[1]),
-      TDS: parseInt(parts[2].split(': ')[1]),
-      TimeRecorded: new Date() // Add the current time as TimeRecorded
-    };
-
-    console.log('Parsed Data:', sensorData);
+    const sensorData = req.body;
 
     if (db) {
       await db.collection('VinUniWater').insertOne(sensorData);
       console.log('Data inserted into MongoDB');
       io.emit('sensorData', sensorData); // Emitting sensor data to all connected clients
+      res.send('Data received and inserted');
     } else {
       console.log('Database connection not established yet.');
+      res.status(500).send('Database connection not established');
     }
   } catch (error) {
-    console.error('Failed to parse data:', error);
+    console.error('Failed to process data:', error);
+    res.status(500).send('Error processing data');
   }
 });
 
@@ -66,13 +59,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// const webPort = 3000;
-// server.listen(webPort, () => {
-//   console.log(`Server running on http://localhost:${webPort}`);
-// });
-
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
