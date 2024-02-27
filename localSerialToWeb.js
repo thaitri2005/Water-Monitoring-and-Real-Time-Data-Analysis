@@ -5,7 +5,7 @@ const axios = require('axios');
 // Update these constants as needed for your setup
 const PORT_PATH = 'COM3';
 const BAUD_RATE = 115200;
-const SERVER_ENDPOINT = 'https://water-monitoring-and-real-time-data.onrender.com/api/data';
+const SERVER_ENDPOINT = 'https://water-monitoring-and-real-time-data.onrender.com/data';
 
 const serialPort = new SerialPort(PORT_PATH, { baudRate: BAUD_RATE });
 const parser = new ReadlineParser();

@@ -37,6 +37,11 @@ app.post('/data', async (req, res) => {
   try {
     const sensorData = req.body;
 
+    // Ensure there is data in the request body
+    if (!sensorData || Object.keys(sensorData).length === 0) {
+      return res.status(400).send('No data provided');
+    }
+
     if (db) {
       await db.collection('VinUniWater').insertOne(sensorData);
       console.log('Data inserted into MongoDB');
@@ -54,6 +59,11 @@ app.post('/data', async (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('A user connected');
+  // Example of how to handle a custom event
+  socket.on('myEvent', (data) => {
+    console.log(data);
+    // You can also emit events back or to other clients
+  });
   socket.on('disconnect', () => {
     console.log('User disconnected');
   });
