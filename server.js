@@ -9,25 +9,27 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-const mongoUrl = 'mongodb://localhost:27017';
+// Replace with your MongoDB Atlas connection string
+const mongoUrl = 'mongodb+srv://thaitri2005:12345@realtimewaterdata.3drttfz.mongodb.net/?retryWrites=true&w=majority&appName=RealTimeWaterData';
 const dbName = 'WaterQuality';
 let db;
 
 // Serve static files from the 'public' directory
 app.use(express.static('public'));
 
-// Async function to connect to MongoDB
+// Async function to connect to MongoDB Atlas
 async function connectToMongo() {
   try {
-    const client = await MongoClient.connect(mongoUrl);
+    const client = await MongoClient.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
     db = client.db(dbName);
-    console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB Atlas');
   } catch (err) {
-    console.error('Failed to connect to MongoDB', err);
+    console.error('Failed to connect to MongoDB Atlas', err);
   }
 }
 
 connectToMongo(); // Establish the database connection
+
 
 const serialPort = new SerialPort({ path: 'COM3', baudRate: 115200 });
 const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\r\n' }));
