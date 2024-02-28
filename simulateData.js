@@ -17,5 +17,5 @@ const sendData = async () => {
   }
 };
 
-// Send data every 5 seconds
+// Send data every 1 seconds
 setInterval(sendData, 1000);

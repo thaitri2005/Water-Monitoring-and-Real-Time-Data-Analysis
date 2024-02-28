@@ -2,7 +2,6 @@ const SerialPort = require('serialport');
 const ReadlineParser = require('@serialport/parser-readline');
 const axios = require('axios');
 
-// Update these constants as needed for your setup
 const PORT_PATH = 'COM3';
 const BAUD_RATE = 115200;
 const SERVER_ENDPOINT = 'https://water-monitoring-and-real-time-data.onrender.com/data';
@@ -25,7 +24,6 @@ parser.on('data', async (data) => {
       return acc;
     }, {});
 
-    // Adding the current time as TimeRecorded
     sensorData.TimeRecorded = new Date();
 
     console.log('Parsed Data:', sensorData);

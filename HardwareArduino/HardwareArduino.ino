@@ -72,5 +72,3 @@ void sendSensorData() {
   mySUART.println(jsonData);
 }
 
-
-// Remember to implement or call your calibration function as needed.

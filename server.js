@@ -7,7 +7,6 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-// Replace with your MongoDB Atlas connection string
 const mongoUrl = 'mongodb+srv://thaitri2005:12345@realtimewaterdata.3drttfz.mongodb.net/?retryWrites=true&w=majority&appName=RealTimeWaterData';
 const dbName = 'WaterQuality';
 let db;
@@ -59,10 +58,8 @@ app.post('/data', async (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('A user connected');
-  // Example of how to handle a custom event
   socket.on('myEvent', (data) => {
     console.log(data);
-    // You can also emit events back or to other clients
   });
   socket.on('disconnect', () => {
     console.log('User disconnected');

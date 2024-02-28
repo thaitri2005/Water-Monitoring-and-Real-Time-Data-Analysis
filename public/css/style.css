@@ -15,14 +15,13 @@ h1 {
 }
 
 .chart {
-    width: 100%; /* Make chart take the full width of its container */
-    height: 400px; /* Set a fixed height */
+    width: 100%; /* Chart take the full width of its container */
+    height: 400px; 
     background-color: #fff;
     border: 1px solid #ddd;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Add some styles for buttons for better appearance */
 button {
     padding: 10px 20px;
     margin-right: 10px;
