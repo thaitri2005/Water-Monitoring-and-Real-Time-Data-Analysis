@@ -2,6 +2,51 @@ body {
     background-color: #f8f9fa;
 }
 
+body.dark-mode {
+    background-color: #343a40;
+    color: #ffffff;
+}
+
+body.dark-mode .navbar {
+    background-color: #6c757d;
+}
+
+body.dark-mode .btn-outline-primary {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+body.dark-mode .btn-outline-primary:hover {
+    background-color: #007bff;
+}
+
+body.dark-mode .btn-outline-secondary {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+    background-color: #6c757d;
+}
+
+body.dark-mode .btn-outline-success {
+    border-color: #ffffff;
+    color: #ffffff;
+}
+
+body.dark-mode .btn-outline-success:hover {
+    background-color: #28a745;
+}
+
+body.dark-mode .card {
+    background-color: #495057;
+}
+
+body.dark-mode .custom-control-label {
+    color: #ffffff;
+}
+
+  
 #chartContainer {
     max-width: 800px;
     margin: 20px auto;
@@ -24,3 +69,4 @@ button.active {
     color: #fff;
     border: 1px solid #007bff;
 }
+
