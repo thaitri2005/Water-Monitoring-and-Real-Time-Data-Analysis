@@ -4,7 +4,8 @@
   "description": "A Node.js project for monitoring water quality in real-time and visualizing data with charts.",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "start-local": "node localSerialToWeb.js"
   },
   "keywords": [
     "water-quality",
