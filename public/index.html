@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <title>Water Quality Monitoring Dashboard</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div id="greeting">
-        <h1>Water Quality Monitoring Dashboard</h1>
-        <button id="showTempChart">Show Temperature Chart</button>
-        <button id="showPhChart">Show pH Chart</button>
-        <button id="showTdsChart">Show TDS Chart</button>
+    <div class="container mt-4">
+        <div class="text-center mb-4">
+            <h1 class="mb-3">Water Quality Monitoring Dashboard</h1>
+            <div class="btn-group" role="group" aria-label="Chart Controls">
+                <button type="button" id="showTempChart" class="btn btn-outline-primary">Show Temperature Chart</button>
+                <button type="button" id="showPhChart" class="btn btn-outline-secondary">Show pH Chart</button>
+                <button type="button" id="showTdsChart" class="btn btn-outline-success">Show TDS Chart</button>
+            </div>
+        </div>
+        <div id="chartContainer" class="shadow-lg p-3 mb-5 bg-white rounded">
+            <canvas id="tempChart" class="chart"></canvas>
+            <canvas id="phChart" class="chart" style="display:none;"></canvas>
+            <canvas id="tdsChart" class="chart" style="display:none;"></canvas>
+        </div>
     </div>
-    <div id="chartContainer">
-        <canvas id="tempChart" class="chart"></canvas>
-        <canvas id="phChart" class="chart" style="display:none;"></canvas>
-        <canvas id="tdsChart" class="chart" style="display:none;"></canvas>
-    </div>
+    
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/app.js"></script>

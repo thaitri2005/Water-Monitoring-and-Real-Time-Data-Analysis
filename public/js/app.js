@@ -90,3 +90,12 @@ function showChart(chartId) {
     });
     document.getElementById(chartId).style.display = 'block'; // Show the selected chart
 }
+
+
+// document.querySelectorAll('button').forEach(function(button) {
+//     button.addEventListener('click', function() {
+//         document.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+//         this.classList.add('active'); // Highlight the active button
+//         showChart(this.id.replace('show', '').toLowerCase() + 'Chart');
+//     });
+// });

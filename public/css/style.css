@@ -1,12 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
-    padding: 20px;
-    margin: 0;
-    background-color: #f0f0f0;
-}
-
-h1 {
-    color: #333;
+    background-color: #f8f9fa;
 }
 
 #chartContainer {
@@ -15,15 +8,19 @@ h1 {
 }
 
 .chart {
-    width: 100%; /* Chart take the full width of its container */
-    height: 400px; 
-    background-color: #fff;
-    border: 1px solid #ddd;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 100%;
+    height: 400px;
 }
+
 
 button {
     padding: 10px 20px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+button.active {
+    background-color: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
 }
