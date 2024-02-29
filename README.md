@@ -36,7 +36,6 @@ Experience the live dashboard and see real-time water quality data visualization
 1. Clone the repository:
     ```bash
     git clone https://github.com/thaitri2005/Water-Monitoring-and-Real-Time-Data-Analysis.git
-    cd water-quality-monitoring-dashboard
     ```
 2. Install dependencies:
     ```bash
