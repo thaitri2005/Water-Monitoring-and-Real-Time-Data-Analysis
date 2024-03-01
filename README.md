@@ -1,6 +1,6 @@
 # Water Quality Monitoring Dashboard
 ## Description
-The Water Quality Monitoring Dashboard is a web-based application aimed at providing real-time insights into water quality parameters such as temperature, pH, and Total Dissolved Solids (TDS). Designed to support environmental monitoring and research, this dashboard integrates cutting-edge technologies to collect, process, and display water quality data. It leverages an Arduino device for the collection of water quality data, Node.js for the backend, MongoDB for data storage, and Socket.io for real-time web socket communication.
+E.QUA is a web-based application aimed at providing real-time insights into water quality parameters such as temperature, pH, and Total Dissolved Solids (TDS). Designed to support environmental monitoring and research, this dashboard integrates cutting-edge technologies to collect, process, and display water quality data. It leverages an Arduino device for the collection of water quality data, Node.js for the backend, MongoDB for data storage, and Socket.io for real-time web socket communication.
 
 ## Features
 <ul>
